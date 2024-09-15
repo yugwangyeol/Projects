@@ -1,0 +1,19 @@
+{
+  "name": "movie-app-2021",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server_proxy.js",
+  "scripts": {
+    "start": "node server_proxy.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "0.21.1",
+    "body-parser": "1.19.0",
+    "cors": "2.8.5",
+    "express": "4.17.1",
+    "http-proxy-middleware": "1.0.6"
+  }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<script src="lab2-2.js"> </script>
+
+</head>
+
+<body>
+
+<h1> (lab2-3.html) "body"태그 : 안녕하세요, 홍길동입니다. </h1>
+
+<h2 id='hhh'>여기가 프로그램의 마지막 실행 태그입니다.</h2>
+<button onclick="console.log('clicked!!!');">What is the time?</button>
+<script>
+    let b = document.getElementsByTagName('body')[0]; // 부모요소
+    let h2 = document.getElementsByTagName('h2')[0]; // 자식요소 (= 삭제할 요소)
+    let h22 = document.getElementById('hhh'); // 자식요소 (= 삭제할 요소)
+    var jbBtn = document.createElement( 'button' );
+      var jbBtnText = document.createTextNode( 'Click' );
+      jbBtn.onclick = function() {console.log('clicked!!!');}; //"console.log('clicked!!!');"; //function() {console.log('clicked!!!');};
+      jbBtn.appendChild( jbBtnText );
+      b.appendChild( jbBtn );
+      //h2.parentNode.removeChild(h2); // 부모요소에서 자식요소 제거
+b.removeChild(h2);
+</script>
+
+</body>
+
+</html>

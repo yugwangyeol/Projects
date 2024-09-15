@@ -1,0 +1,134 @@
+body {
+  background-color: #efefef;
+}
+
+.container {
+  width: 512px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 6rem;
+  border-radius: 4px;
+  overflow: hidden;
+  /*
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  */
+}
+.input_div h1{
+  background: #22b8cf;
+  color: white;
+  height: 4rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.input_search{
+  display: flex;
+  background: #495057;
+}
+.input_search input {
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: white;
+  flex: 1;
+}
+.input_search input::placeholder {
+  color: #dee2e6;
+}
+.input_search button {
+  background: none;
+  outline: none;
+  border: none;
+  background: #868e96;
+  color: white;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1.5rem;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.1s background ease-in;
+}
+.input_search button :hover {
+  background: #adb5bd;
+}
+
+.loader {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 300;
+}
+
+.movies {
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  width: 100%;
+  flex-direction: column;
+  height: 600px;
+}
+
+.boards {
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 50px;
+  padding-top: 70px;
+  width: 85%;
+}
+
+.movie_buttons{
+  background: white;
+  display: flex;
+  height: 2.5rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.movie_button{
+  background: #22b8cf;
+  color: white;
+  height: 1.6rem;
+  width: 2.8rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25);
+}
+
+/*
+  .input_search {
+    /*
+    width: 600px;
+    margin: 0;
+    height: 51px;
+    background: none;
+    border-bottom: 1px solid #d63461;
+    border-radius: 0;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    padding: 0 5px;
+    position: relative;
+}
+*/
+.input_div {
+  text-align: center;
+}

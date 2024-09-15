@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>XMLHttpRequest</title>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+        $(document).ready(function () { //제이쿼리 설정 겟버튼 마우스 처리
+            $('#get').click(function () {
+                $.ajax({ // $ 제이쿼리 객체
+                    url: '/products', // 속성 음료수 리스트 
+                    type: 'get', // 명령어
+                    dataType: 'text',
+                    success: function (data) { // 응답 메세지 도착 이벤트 처리 함수 순수한 데이터를 끄집어냄 성공하면 실행됨 응답 메세지 안에 데이터 출력 메세지
+                        $('#output').val(data); //아우풋 아이디 찾아냄 변수로를 채워넣음
+                    }
+                });
+            });
+
+            $('#post').click(function () { // 포스트 함수
+                $.ajax({
+                    url: '/products',
+                    type: 'post', //이름이 바뀜
+                    dataType: 'text',
+                    data: { // 추가 입력 데이터 메세지 본체에 채워라
+                        name: $('#name').val(), // 불러들여짐 
+                        price: $('#price').val() // 5400을 갖고옴
+                    },
+                    success: function (data) { // 데이터를 출력
+                        $('#output').val(data);
+                        $('#name2').val($('#name').val());
+                        $('#price2').val($('#price').val());
+                    }
+                });
+            });
+
+            $('#put').click(function () {
+                $.ajax({
+                    url: '/products/'+ $('#index').val(), // 0번 인덱스
+                    type: 'put',
+                    dataType: 'text',
+                    data: {
+                        name: $('#name').val(),
+                        price: $('#price').val()
+                    },
+                    success: function (data) {
+                        $('#output').val(data);
+                        $('#name2').val($('#name').val());
+                        $('#price2').val($('#price').val());
+                    }
+                });
+            });
+
+            $('#delete').click(function () {
+                $.ajax({
+                    url: '/products/'+$('#index').val(), // 풋과 동일
+                    type: 'delete',
+                    dataType: 'text', // 입력 데이터 요구 안함
+                    success: function (data) {
+                        $('#output').val(data);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>입력 명령 버튼:</h2>
+    <button id="get">음료객체정보읽기(GET)</button>
+    <button id="post">신규음료등록(POST)</button>
+    <button id="put">기존음료수정(PUT)</button>
+    <button id="delete">기존음료삭제(DELETE)</button><br><br>
+    <hr><br>
+    <h3>입력데이터:</h3>
+    음료이름: <input id="name" /><br>
+    음료가격: <input id="price" /><br>
+    음료index: <input id="index" /><br><br>
+    <hr><br>
+    <h3>응답 메세지 전체:</h3>
+    <textarea id="output" disabled="disabled" cols="40" rows="5"></textarea><br><br>
+    <h3>수정/추가 이후 해당 음료 정보:</h3>
+    음료이름: <input id="name2" /><br>
+    음료가격: <input id="price2" /><br>
+</body>
+</html>

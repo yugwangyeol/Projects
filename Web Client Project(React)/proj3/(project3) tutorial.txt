@@ -1,0 +1,161 @@
+
+ (프로젝트 3) 튜토리얼
+ ---------------------
+ 
+
+(1) "불법사이트 접근 불가 문제"를 URL로 확인
+--------------------------------------------
+
+  1) 날씨 사이트(openweathermap.org) 정상 접근 가능
+
+    https://openweathermap.org/data/2.5/find?q=Seoul&appid=439d4b804bc8187953eb36d2a8c26a02&units=metric
+
+    http://api.openweathermap.org/data/2.5/weather?q=Seoul&units=imperial&APPID=bbeb34ebf60ad50f7893e7440a1e2b0b
+
+
+  2) Naver API CORS 접근 문제 해결 (bypassing by proxy)
+
+    http://localhost:4000/WebTestNaverAPICall.html
+
+    http://localhost:4000/WebTestNaverAPICallCORS.html
+
+
+  3) 로컬 서버 구동("node server_proxy.js") 후 날씨 URL 호출 via proxy
+
+    http://localhost:4000/apw/data/2.5/weather?q=Seoul&appid=bbeb34ebf60ad50f7893e7440a1e2b0b&units=metric
+
+    http://localhost:4000/apw/data/2.5/weather?q=43210&units=imperial&APPID=bbeb34ebf60ad50f7893e7440a1e2b0b
+
+
+  4) 호스팅(heroku) 서버에 업로드 후 브라우저에서 Naver API 호출 
+      (아래의 (3)단계를 진행하면 실행 가능함)
+
+    https://movie-app-2021.herokuapp.com/WebTestNaverAPICall.html
+
+    https://movie-app-2021.herokuapp.com/WebTestNaverAPICallCORS.html
+
+
+  5) yts 사이트(불법(?)사이트) 접근 불가 문제 발생
+
+    https://yts.lt/api/v2/list_movies.json?sort_by=like_count&order_by=desc&limit=5
+
+    https://yts.mx/assets/images/movies/avengers_endgame_2019/large-cover.jpg
+
+
+
+
+(2) (deployment) React App building ((프로젝트2)의 튜토리얼 앱(todo-app(todolist))과 네이버 앱(movie) 대상)
+------------------------------------------------------------------------------------------------------------
+
+ > npm run build
+ --> 신규 생성된 "build" 폴더 전체를 (프로젝트3)의 "movie-app-2021/public" 안에 넣고
+     내부의 2개 파일 이름을 변경 
+     (예1: "index.html"은 해당 앱에 따라 "todolist.html" 혹은 "movie.html"로 변경)
+     (예2: "asset-manifest.json"은 해당 앱에 따라 "asset-manifest-todolist.json" 혹은 
+             "asset-manifest-movie.json"로 변경)
+
+
+
+
+(3) (publishing) Heroku hosting process
+----------------------------------------
+
+  0) 가상대학에서 제공된 압축파일(proj3.zip)) 안에 있는 "movie-app-2021" 폴더를
+     복사하여 새 폴더 이름을 "movie-app-(본인학번)"으로 수정하여 (프로젝트3) 진행
+
+       --> 최초의 경우 로컬 라이브러리 설정을 위하여 다음 명령 1회 실행
+ 
+              > node install
+
+
+  1) download/install Git & Heroku CLI, 
+     Heroku 계정 생성 및 어플리케이션 등록(예: "movie-app-(본인학번)")
+
+    1-1) download/install Git
+
+        --> https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+        --> https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
+
+    1-2) download/install Heroku CLI
+
+        --> https://devcenter.heroku.com/articles/heroku-cli#download-and-install
+
+    1-3) Heroku 계정 생성 및 어플리케이션 등록(예: "movie-app-(본인학번)")
+
+        --> 다음 사이트에서 오른쪽 꼭대기의 <Sign up> 버튼을 눌러 계정 생성
+
+		https://www.heroku.com/
+
+        --> Heroku 사이트 로그인 후 오른쪽 위의 <New> 버튼을 눌러 <Create new app> 선택
+             -> "App name"에 본인의 어플리케이션 이름 입력(예: movie-app-(본인학번))
+             -> <Create app> 버튼 클릭하면 입력된 이름으로 어플리케이션이 생성됨
+             -> 생성된 어플리케이션 페이지 안의 <Settings> 폴더 선택
+             -> "Buildpacks" 섹션 오른쪽의 <Add buildpack> 버튼 클릭
+             -> <nodejs> 버튼 클릭  
+	     -> <Save changes> 버튼 클릭하여 개발환경을 "node.js"로 설정
+
+
+  2)  Heroku CLI login 그리고 clone the repository
+
+        --> (프로젝트3)폴더(movie-app-2021 혹은 movie-app-(본인학번)) 바깥에서 터미널 창 열고 다음 명령어 실행
+
+        > heroku login
+        > heroku git:clone -a movie-app-2021  // 본인의 (프로젝트3)에서는 "movie-app-(본인학번)"
+        > cd movie-app-2021  // 본인의 (프로젝트3)에서는 "movie-app-(본인학번)"
+
+
+  3) deploy application codes
+
+        > git add .
+        > git commit -am "make it better"
+        > git push heroku master
+
+
+  4) React 앱 실행 테스트
+
+        --> 다음 URL을 브라우저에서 호출  // 본인의 (프로젝트3)에서는 "movie-app-(본인학번)"
+
+            https://movie-app-2021.herokuapp.com/build/todolist.html
+            https://movie-app-2021.herokuapp.com/build/movie.html
+
+ 
+
+
+
+(4) remote 프록시를 Heroku hosting 서버에 업로드하여 문제 해결
+--------------------------------------------------------------
+
+  1) local-remote 동시 구현 프록시 프로그램 구현 및 실행
+
+        > node server_proxy.js    // 로컬 테스트
+
+        --> 위 단계(3)의 Heroku hosting 과정으로 퍼블리싱하면 
+            아래의 3가지 테스트에서 모두 yts 서비스 접근 가능하게 됨
+
+
+
+  2) 브라우저에서 URL 호출시, 로칼 프록시와 리모트 프록시 기능 동시 사용 및 연계로 접근 불가 문제 해결
+
+    http://localhost:4000/yts/api/v2/list_movies.json?sort_by=like_count&order_by=desc&limit=5
+
+    http://localhost:4000/img-yts/assets/images/movies/Inception_2010/medium-cover.jpg
+
+
+
+  3) remote proxy 서버 기능만 사용한 문제 해결 (heroku 호스팅 서버에서 리모트 프록시 프로그램 실행)
+
+    https://movie-app-2021.herokuapp.com/yts/api/v2/list_movies.json?sort_by=like_count&order_by=desc&limit=5
+
+    https://movie-app-2021.herokuapp.com/img-yts/assets/images/movies/Inception_2010/medium-cover.jpg
+
+    https://movie-app-2021.herokuapp.com/yts/api/v2/movie_details.json?movie_id=1606&with_images=true&with_cast=true
+
+    https://movie-app-2021.herokuapp.com/yts/assets/images/movies/Inception_2010/large-cover.jpg
+
+
+
+  4) yts 사이트 접근 html 페이지 예제 (jason 데이터 요청 -> movie image 요청 -> 브라우저 화면에 이미지 노출)
+
+    https://movie-app-2021.herokuapp.com/WebTestYTSAPICallProxy.html
+
+
